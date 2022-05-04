@@ -9,6 +9,7 @@ public interface NotificationService {
     User user_info_update(User user);
     void user_haveNot_loginFrom_longTime(User user);
     void purchased_eGift_card(User user);
-    GiftRedeemDetails notified_readme_eGiftCard(GiftRedeemDetails giftRedeemDetails, User user);
+    void notified_redeem_eGiftCard(User user);
     User onProfileUpdate(User user);
+    GiftRedeemDetails successfully_redeemed_eGiftCard(GiftRedeemDetails giftRedeemDetails, User user);
 }

@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.giftcard.notification.exception.CustomMailNotificationException;
 import com.giftcard.notification.model.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +19,7 @@ public class MailServiceImpl implements MailService {
     @Autowired
     JavaMailSender mailSender;
 
+    @Override
     public void sendEmail(Mail mail) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -32,10 +34,8 @@ public class MailServiceImpl implements MailService {
 
             mailSender.send(mimeMessageHelper.getMimeMessage());
 
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            throw new CustomMailNotificationException("Error While Sending Mail! please try again after some time!");
         }
     }
 
